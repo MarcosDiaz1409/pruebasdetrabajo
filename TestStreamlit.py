@@ -2,16 +2,39 @@ import streamlit as st
 from fpdf import FPDF  # <- NUEVO
 from io import BytesIO  # <- NUEVO
 
-# Eliminar menú, footer y header por completo
 st.markdown("""
     <style>
-        #MainMenu {visibility: hidden;}        /* Menú de los tres puntos */
-        footer {visibility: hidden;}           /* Footer Made with Streamlit */
-        header {visibility: hidden;}           /* Header superior */
-        .stAppDeployButton {display: none;}    /* Botón de Deploy */
-        .stDeployButton {display: none;}       /* Botón Deploy alternativo */
-        .css-1rs6os {display: none;}           /* Imagen o logo superior */
-        .css-18ni7ap {display: none;}          /* Menú de Streamlit */
+        /* Ocultar menú y footer */
+        #MainMenu {visibility: hidden;}               
+        footer {visibility: hidden;}                   
+        header {visibility: hidden;}                   
+
+        /* Ocultar botones de deploy */
+        .stAppDeployButton {display: none !important;}
+        .stDeployButton {display: none !important;}
+
+        /* Ocultar el top right (a veces usa esta clase) */
+        .css-1rs6os {display: none !important;}
+        .css-18ni7ap {display: none !important;}
+
+        /* Ocultar los iconos flotantes de Streamlit y GitHub en la esquina inferior derecha */
+        .stActionButton {display: none !important;}
+        .stActionContainer {display: none !important;}
+        .st-emotion-cache-16huue1 {display: none !important;}
+        .st-emotion-cache-1gwvy71 {display: none !important;}
+
+        /* A veces Streamlit cambia nombres de clases → ocultamos todo lo clickeable abajo */
+        .stStatusWidget {display: none !important;}
+        .stToolbar {display: none !important;}
+        .viewerBadge_container__1QSob {display: none !important;}
+        .stAppToolbar {display: none !important;}
+
+        /* Por si cambian algo en futuras versiones */
+        div[data-testid="stStatusWidget"] {display: none !important;}
+        div[data-testid="stToolbar"] {display: none !important;}
+        div[data-testid="stSidebarNav"] {display: none !important;}
+        div[data-testid="stBottomAnchor"] {display: none !important;}
+
     </style>
 """, unsafe_allow_html=True)
 
