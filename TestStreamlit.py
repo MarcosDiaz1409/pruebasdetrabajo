@@ -2,6 +2,19 @@ import streamlit as st
 from fpdf import FPDF  # <- NUEVO
 from io import BytesIO  # <- NUEVO
 
+# Eliminar menú, footer y header por completo
+st.markdown("""
+    <style>
+        #MainMenu {visibility: hidden;}        /* Menú de los tres puntos */
+        footer {visibility: hidden;}           /* Footer Made with Streamlit */
+        header {visibility: hidden;}           /* Header superior */
+        .stAppDeployButton {display: none;}    /* Botón de Deploy */
+        .stDeployButton {display: none;}       /* Botón Deploy alternativo */
+        .css-1rs6os {display: none;}           /* Imagen o logo superior */
+        .css-18ni7ap {display: none;}          /* Menú de Streamlit */
+    </style>
+""", unsafe_allow_html=True)
+
 # ----------------- CONFIGURACIÓN BÁSICA -----------------
 st.set_page_config(
     page_title="Ficha de Proyectos",
