@@ -4,37 +4,31 @@ from io import BytesIO  # <- NUEVO
 
 st.markdown("""
     <style>
-        /* Ocultar menú y footer */
-        #MainMenu {visibility: hidden;}               
-        footer {visibility: hidden;}                   
-        header {visibility: hidden;}                   
+        /* Oculta menú, footer y header generales */
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
 
-        /* Ocultar botones de deploy */
-        .stAppDeployButton {display: none !important;}
-        .stDeployButton {display: none !important;}
+        /* Oculta el badge de abajo a la derecha:
+           - Created by <user>
+           - Streamlit icon
+        */
+        .css-1jc7ptx,
+        .e1ewe7hr3,
+        .viewerBadge_container__1QSob,
+        .styles_viewerBadge__1yB5_,
+        .viewerBadge_link__1S137,
+        .viewerBadge_text__1JaDK {
+            display: none !important;
+            visibility: hidden !important;
+        }
 
-        /* Ocultar el top right (a veces usa esta clase) */
-        .css-1rs6os {display: none !important;}
-        .css-18ni7ap {display: none !important;}
-
-        /* Ocultar los iconos flotantes de Streamlit y GitHub en la esquina inferior derecha */
-        .stActionButton {display: none !important;}
-        .stActionContainer {display: none !important;}
-        .st-emotion-cache-16huue1 {display: none !important;}
-        .st-emotion-cache-1gwvy71 {display: none !important;}
-
-        /* A veces Streamlit cambia nombres de clases → ocultamos todo lo clickeable abajo */
-        .stStatusWidget {display: none !important;}
-        .stToolbar {display: none !important;}
-        .viewerBadge_container__1QSob {display: none !important;}
-        .stAppToolbar {display: none !important;}
-
-        /* Por si cambian algo en futuras versiones */
-        div[data-testid="stStatusWidget"] {display: none !important;}
-        div[data-testid="stToolbar"] {display: none !important;}
-        div[data-testid="stSidebarNav"] {display: none !important;}
-        div[data-testid="stBottomAnchor"] {display: none !important;}
-
+        /* Por si el testid cambia a widget de estado/decoration */
+        div[data-testid="stStatusWidget"],
+        div[data-testid="stDecoration"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
