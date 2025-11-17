@@ -223,7 +223,15 @@ def crear_pdf_proyecto(proyecto: dict) -> bytes:
     pdf.set_font("Arial", "", 11)
     pdf.multi_cell(page_width, 6, str(proyecto.get("observaciones", "")))
 
-    pdf_bytes = pdf.output(dest="S").encode("latin-1")
+    # Compatibilidad con distintas versiones de fpdf/fpdf2
+    result = pdf.output(dest="S")
+
+    # En algunas versiones devuelve str, en otras bytes/bytearray
+    if isinstance(result, str):
+        pdf_bytes = result.encode("latin-1")
+    else:
+        pdf_bytes = bytes(result)
+
     return pdf_bytes
 
 
