@@ -4,28 +4,50 @@ from io import BytesIO  # <- NUEVO
 
 st.markdown("""
     <style>
-        /* Oculta menú, footer y header generales */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
+        /* Ocultar menú superior, header y footer genéricos */
+        #MainMenu {visibility: hidden !important;}
+        footer {visibility: hidden !important;}
+        header {visibility: hidden !important;}
 
-        /* Oculta el badge de abajo a la derecha:
-           - Created by <user>
-           - Streamlit icon
-        */
-        .css-1jc7ptx,
-        .e1ewe7hr3,
+        /* Ocultar el badge de "Created by / Hosted with Streamlit" (varios casos) */
         .viewerBadge_container__1QSob,
-        .styles_viewerBadge__1yB5_,
         .viewerBadge_link__1S137,
-        .viewerBadge_text__1JaDK {
+        .viewerBadge_text__1JaDK,
+        .styles_viewerBadge__1yB5_,
+        .styles_viewerBadge,
+        .stStatusWidget,
+        .stAppToolbar,
+        .stToolbar,
+        .stDecoration,
+        .st-emotion-cache-16huue1,
+        .st-emotion-cache-1gwvy71 {
             display: none !important;
             visibility: hidden !important;
         }
 
-        /* Por si el testid cambia a widget de estado/decoration */
+        /* Cualquier cosa marcada como decoración / widget de estado */
         div[data-testid="stStatusWidget"],
         div[data-testid="stDecoration"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Ataque más genérico: cualquier badge flotando abajo a la derecha */
+        div[style*="position: fixed"][style*="bottom: 0px"][style*="right: 0px"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Por si usan enlaces con estos textos */
+        a[href*="streamlit.io"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* A veces el bloque viene con aria-label descriptivo */
+        div[aria-label*="Created"],
+        div[aria-label*="Hosted"],
+        div[aria-label*="Streamlit"] {
             display: none !important;
             visibility: hidden !important;
         }

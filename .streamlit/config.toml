@@ -4,6 +4,12 @@ hideTopBar = true
 [browser]
 gatherUsageStats = false
 
+[ui]
+hide_streamlit_markers = true
+
+[browser]
+gatherUsageStats = false
+
 [theme]
 base = "light"
 primaryColor = "#3366CC"
