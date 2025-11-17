@@ -143,22 +143,32 @@ if "proyectos" not in st.session_state:
     st.session_state["proyectos"] = []
 
 
-# ================== FUNCIÓN PDF ==================
 def crear_pdf_proyecto(proyecto: dict) -> bytes:
-    from fpdf import FPDF
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
+
+    # Márgenes explícitos
+    pdf.set_left_margin(15)
+    pdf.set_right_margin(15)
+
     pdf.add_page()
 
+    # Encabezado
     pdf.set_font("Arial", "B", 16)
     pdf.cell(0, 10, "Ficha de Proyecto", ln=True)
     pdf.ln(4)
 
     pdf.set_font("Arial", "", 11)
 
+    # Ancho útil de la página (ya descontando márgenes)
+    page_width = pdf.w - pdf.l_margin - pdf.r_margin
+
     def linea(titulo, valor=""):
+        # Asegurarse de que siempre sea texto
         texto = f"{titulo}: {valor}"
-        pdf.multi_cell(0, 6, texto)
+        texto = str(texto)
+        # Usar un ancho fijo (page_width) en lugar de 0
+        pdf.multi_cell(page_width, 6, texto)
 
     linea("Código completo", proyecto.get("codigo_completo", ""))
     linea("Título automático", proyecto.get("titulo_automatico", ""))
@@ -199,22 +209,23 @@ def crear_pdf_proyecto(proyecto: dict) -> bytes:
     pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 7, "Resumen automático", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, proyecto.get("resumen_auto", ""))
+    pdf.multi_cell(page_width, 6, str(proyecto.get("resumen_auto", "")))
     pdf.ln(3)
 
     pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 7, "Descripción", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, proyecto.get("descripcion", ""))
+    pdf.multi_cell(page_width, 6, str(proyecto.get("descripcion", "")))
     pdf.ln(3)
 
     pdf.set_font("Arial", "B", 11)
     pdf.cell(0, 7, "Observaciones internas", ln=True)
     pdf.set_font("Arial", "", 11)
-    pdf.multi_cell(0, 6, proyecto.get("observaciones", ""))
+    pdf.multi_cell(page_width, 6, str(proyecto.get("observaciones", "")))
 
     pdf_bytes = pdf.output(dest="S").encode("latin-1")
     return pdf_bytes
+
 
 
 # ================== ENCABEZADO ==================
